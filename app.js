@@ -6,9 +6,9 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const expressValidator = require("express-validator");
-
+const globalErrorHandler = require('./helpers/dbErrorHandler');
 //Importar Routes
-
+const businesRoutes = require('./routes/businnesRoutes')
 
 //app engloba todas las funciones de express
 
@@ -27,9 +27,12 @@ app.use(expressValidator());
 app.use(cors());
 
 //Routes middleware
+app.use('/api', businesRoutes)
 
-app.get('/', (req, res) => {
-    res.send('Tood ok')
-})
+
+// app.get('/', (req, res) => {
+//     res.send('Tood ok')
+// })
+app.use(globalErrorHandler);
 
 module.exports = app;
