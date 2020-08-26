@@ -12,10 +12,9 @@ process.on('uncaughtException', err => {
 
 })
 
-dotenv.config({
-    path: './.env'
-})
+
 console.log(process.env.NODE_ENV);
+console.log(process.env.JWT_SECRET);
 const DB = process.env.DATABASE.replace(
     '<PASSWORD>',
     process.env.DATABASE_PASSWORD
@@ -30,7 +29,7 @@ mongose
     })
     .then(() => console.log("DB connection successful 🚀 ⚡️ "))
 // .catch(err => console.log('Huno un error'))
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 
 //Iniciamos el servidor y estamos escuchando con Listen
 const server = app.listen(port, () => {
