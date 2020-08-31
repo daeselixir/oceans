@@ -15,6 +15,7 @@ process.on('uncaughtException', err => {
 
 console.log(process.env.NODE_ENV);
 console.log(process.env.JWT_SECRET);
+
 const DB = process.env.DATABASE.replace(
     '<PASSWORD>',
     process.env.DATABASE_PASSWORD

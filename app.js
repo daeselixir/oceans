@@ -16,6 +16,7 @@ const globalErrorHandler = require('./helpers/dbErrorHandler');
 const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes')
 const businesRoutes = require('./routes/businnesRoutes')
+const departamentRoutes = require('./routes/departamentRoutes')
 
 //app engloba todas las funciones de express
 
@@ -37,6 +38,7 @@ app.use(cors());
 app.use('/api', authRoutes)
 app.use('/api', userRoutes)
 app.use('/api', businesRoutes)
+app.use('/api', departamentRoutes)
 
 
 

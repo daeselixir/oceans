@@ -32,7 +32,7 @@ exports.listBusiness = (req, res) => {
 exports.createBusiness = catchAsync(async (req, res) => {
     const newBusiness = await Business.create(req.body)
 
-    res.stauts(201).json({
+    res.status(201).json({
         status: 'sucess',
         data: {
             business: newBusiness
@@ -56,12 +56,8 @@ exports.updateBusiness = catchAsync(async (req, res) => {
     })
 })
 
-exports.deleteBusiness = catchAsync(async (req, res, next) => {
+exports.deleteBusiness = catchAsync(async (req, res) => {
     const business = await Business.findByIdAndDelete(req.params.businessId);
-
-    if (!business) {
-        return next(new AppError('No business found with that ID', 404));
-    }
 
     res.status(204).json({
         status: 'success',

@@ -17,6 +17,5 @@ router.put('/business/:businessId', updateBusiness)
 router.delete('/business/:businessId', deleteBusiness)
 
 
-router.get('/business', listBusiness)
 
 module.exports = router
