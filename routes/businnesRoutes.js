@@ -2,14 +2,20 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    createBusiness2,
-    listBusiness
+    createBusiness,
+    listBusiness,
+    deleteBusiness,
+    updateBusiness,
+    businessId
 } = require('../controllers/businessController')
 
-router.get('/', listBusiness)
-
+router.get('/business/:businessId', businessId)
+router.get('/business', listBusiness)
 router.post('/business/create',
-    createBusiness2)
+    createBusiness)
+router.put('/business/:businessId', updateBusiness)
+router.delete('/business/:businessId', deleteBusiness)
+
 
 
 module.exports = router
