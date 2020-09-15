@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const mongooseHistory = require("mongoose-history");
+const diffHistory = require("mongoose-diff-history/diffHistory").plugin;
 
 const { ObjectId } = mongoose.Schema;
 
@@ -48,9 +48,5 @@ const ticketSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-var options = {
-  metadata: [{ key: "headerMessage", value: "headerMessage" }],
-};
-ticketSchema.plugin(mongooseHistory, options);
-
+ticketSchema.plugin(diffHistory, { omit: "photo" });
 module.exports = mongoose.model("Ticket", ticketSchema);

@@ -11,8 +11,8 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 
-console.log(process.env.NODE_ENV);
-console.log(process.env.JWT_SECRET);
+//console.log(process.env.NODE_ENV);
+//console.log(process.env.JWT_SECRET);
 
 const DB = process.env.DATABASE.replace(
   "<PASSWORD>",
