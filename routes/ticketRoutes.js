@@ -7,10 +7,12 @@ const {
     listTicket,
     createTicket,
     updateTicket,
-    deleteTicket
+    deleteTicket,
+    getHistorialId
 } = require('../controllers/ticketController')
 
 router.get('/ticket', listTicket)
+router.get('/ticket/historial', getHistorialId)
 router.get('/ticket/:ticketId', readId)
 router.post('/ticket/create', createTicket)
 router.put('/ticket/:ticketId', updateTicket)

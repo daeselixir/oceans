@@ -1,5 +1,27 @@
 const Ticket = require("../models/ticket.js");
 const catchAsync = require("../validator/catchAsync");
+const mongoose = require("mongoose");
+
+//Conexion coleccion Historial
+var Schema = mongoose.Schema;
+mongoose.connect(
+  "mongodb+srv://daeselixir:mahuida1106@cluster0.to4nx.mongodb.net/oceans?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  },
+  function (err) {
+    if (err) throw err;
+
+    console.log("Successfully connected");
+  }
+);
+
+var db = mongoose.connection;
+var MyModel = db.model("histories", new Schema({
+  name: String
+}));
+
+// Consultas
 
 exports.ticketId = catchAsync(async (req, res, next) => {
   const ticket = await Ticket.findById(req.params.ticketId);
@@ -26,6 +48,22 @@ exports.listTicket = (req, res) => {
     res.json(data);
   });
 };
+
+exports.getHistorialId = catchAsync(async (req, res, next) => {
+  MyModel.find({}, function (err, historial) {
+    Ticket.populate(historial, {
+        collectionId: '_id',
+
+      },
+      function (err, historial) {
+        res.status(200).json(historial);
+
+      });
+
+  });
+})
+
+
 
 exports.createTicket = catchAsync(async (req, res) => {
   const newTicket = await Ticket.create(req.body);
