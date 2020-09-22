@@ -10,7 +10,7 @@ exports.businessId = catchAsync(async (req, res, next) => {
   }
 
   req.params = business;
-
+  console.log(req.params)
   next();
 });
 
@@ -45,9 +45,10 @@ exports.updateBusiness = catchAsync(async (req, res) => {
     new: true,
     runValidators: true,
   });
-  if (!business) {
-    return next(new AppError("No business found with that Id", 400));
-  }
+  console.log(req.body)
+  console.log(req.params.busId)
+  console.log(business)
+
   res.status(200).json({
     status: "sucess",
     data: {

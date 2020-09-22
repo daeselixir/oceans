@@ -12,7 +12,7 @@ exports.userById = async (req, res, next, id) => {
       });
     }
     req.profile = user;
-    console.log(req.params);
+    //console.log(req.params);
 
     next();
   });
@@ -25,14 +25,11 @@ exports.read = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  User.findOneAndUpdate(
-    {
+  User.findOneAndUpdate({
       _id: req.profile._id,
-    },
-    {
+    }, {
       $set: req.body,
-    },
-    {
+    }, {
       new: true,
     },
     (err, user) => {

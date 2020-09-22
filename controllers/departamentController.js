@@ -17,7 +17,6 @@ exports.departamentId = catchAsync(async (req, res, next) => {
 });
 
 exports.readId = (req, res) => {
-  //console.log(req.params);
   return res.json(req.params);
 };
 

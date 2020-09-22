@@ -20,10 +20,12 @@ exports.signup = catchAsync(async (req, res) => {
 });
 //Ingresar
 exports.signin = (req, res) => {
-  const { email, password } = req.body;
+  const {
+    email,
+    password
+  } = req.body;
   //console.log(req.profile);
-  User.findOne(
-    {
+  User.findOne({
       email,
     },
     (err, user) => {
@@ -41,8 +43,7 @@ exports.signin = (req, res) => {
         });
       }
       // generate a signed token with user id and secret
-      const token = jwt.sign(
-        {
+      const token = jwt.sign({
           _id: user._id,
         },
         process.env.JWT_SECRET
@@ -53,7 +54,12 @@ exports.signin = (req, res) => {
       });
 
       // return response with user and token to frontend client
-      const { _id, name, email, role } = user;
+      const {
+        _id,
+        name,
+        email,
+        role
+      } = user;
       return res.json({
         token,
         user: {
@@ -82,10 +88,11 @@ exports.requireSignin = expressJwt({
 
 exports.isAuth = (req, res, next) => {
   let user = req.profile && req.auth && req.profile._id == req.auth._id;
-  console.log(req.profile);
+
+  //console.log(req.profile);
   //console.log(req.auth);
   // console.log(req.profile._id);
-  console.log(req.auth._id);
+  //console.log(req.auth._id);
 
   if (!user) {
     return res.status(403).json({

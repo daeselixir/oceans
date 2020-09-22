@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 
-const businesSchema = new mongoose.Schema({
+const businessSchema = new mongoose.Schema({
     rut: {
         type: String,
         trim: true,
@@ -25,4 +25,4 @@ const businesSchema = new mongoose.Schema({
 })
 
 
-module.exports = mongoose.model('Business', businesSchema)
+module.exports = mongoose.model('Business', businessSchema)

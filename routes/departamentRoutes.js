@@ -16,7 +16,9 @@ const {
   isAdmin,
 } = require("../controllers/authController");
 
-const { userById } = require("../controllers/userController");
+const {
+  userById
+} = require("../controllers/userController");
 
 //Routes
 
@@ -61,7 +63,7 @@ router.delete(
 );
 
 //Parametros por defecto
-//console.log(router.param("userId", userById));
+
 router.param("depId", departamentId);
 router.param("userId", userById);
 

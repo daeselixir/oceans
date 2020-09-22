@@ -16,7 +16,9 @@ const {
   isAdmin,
 } = require("../controllers/authController");
 
-const { userById } = require("../controllers/userController");
+const {
+  userById
+} = require("../controllers/userController");
 
 //Routes
 
@@ -41,10 +43,8 @@ router.post(
 );
 //Actualizar empresa
 router.put(
-  "/business/:userId/:busId",
-  requireSignin,
-  isAuth,
-  isAdmin,
+  "/business/:busId",
+
   updateBusiness
 );
 
