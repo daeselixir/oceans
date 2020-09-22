@@ -1,34 +1,68 @@
 const express = require("express");
 const router = express.Router();
 
+const {
+  departamentId,
+  readId,
+  createDepartament,
+  listDepartament,
+  deleteDepartament,
+  updateDepartament,
+} = require("../controllers/departamentController");
 
 const {
-    createDepartament,
-    listDepartament,
-    deleteDepartament,
-    updateDepartament,
-    departamentId,
-    readId
+  requireSignin,
+  isAuth,
+  isAdmin,
+} = require("../controllers/authController");
 
-} = require('../controllers/departamentController')
+const { userById } = require("../controllers/userController");
 
-const {
-    requireSignin,
-    isAuth,
-    isAdmin
-} = require('../controllers/authController')
-const {
-    userById
-} = require('../controllers/userController')
+//Routes
 
-router.get('/departament/:depId', readId)
-router.get('/departament/list/:userId', isAdmin, listDepartament)
-router.post('/departament/create/:userId', requireSignin, isAuth, isAdmin, createDepartament)
-router.put('/departament/:depId', updateDepartament)
-router.delete('/departament/:depId', deleteDepartament)
+router.get(
+  "/departament/:userId/:depId",
+  requireSignin,
+  isAuth,
+  isAdmin,
+  readId
+);
 
-router.param('depId', departamentId)
-router.param('userId', userById)
+router.get(
+  "/departament/:userId",
+  requireSignin,
+  isAuth,
+  isAdmin,
+  listDepartament
+);
 
+router.post(
+  "/departament/create/:userId",
+  requireSignin,
+  isAuth,
+  isAdmin,
+  createDepartament
+);
 
-module.exports = router
+router.put(
+  "/departament/:userId/:depId",
+  requireSignin,
+  isAuth,
+  isAdmin,
+  updateDepartament
+);
+
+router.delete(
+  "/departament/:userId/:depId",
+  requireSignin,
+  isAuth,
+  isAdmin,
+  deleteDepartament
+);
+
+//Parametros por defecto
+//console.log(router.param("userId", userById));
+router.param("depId", departamentId);
+router.param("userId", userById);
+
+module.exports = router;

@@ -2,20 +2,61 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    createBusiness,
-    listBusiness,
-    deleteBusiness,
-    updateBusiness,
-    businessId
-} = require('../controllers/businessController')
+  createBusiness,
+  listBusiness,
+  deleteBusiness,
+  updateBusiness,
+  businessId,
+  readBusinessId,
+} = require("../controllers/businessController");
 
-router.get('/business/:businessId', businessId)
-router.get('/business', listBusiness)
-router.post('/business/create',
-    createBusiness)
-router.put('/business/:businessId', updateBusiness)
-router.delete('/business/:businessId', deleteBusiness)
+const {
+  requireSignin,
+  isAuth,
+  isAdmin,
+} = require("../controllers/authController");
 
+const { userById } = require("../controllers/userController");
 
+//Routes
 
-module.exports = router
+//Obtener una empresa
+router.get(
+  "/business/:userId/:busId",
+  requireSignin,
+  isAuth,
+  isAdmin,
+  readBusinessId
+);
+//Obtener todos las empresas
+router.get("/business/:userId", requireSignin, isAuth, isAdmin, listBusiness);
+
+//Crear
+router.post(
+  "/business/create/:userId",
+  requireSignin,
+  isAuth,
+  isAdmin,
+  createBusiness
+);
+//Actualizar empresa
+router.put(
+  "/business/:userId/:busId",
+  requireSignin,
+  isAuth,
+  isAdmin,
+  updateBusiness
+);
+
+router.delete(
+  "/business/:userId/:busId",
+  requireSignin,
+  isAuth,
+  isAdmin,
+  deleteBusiness
+);
+
+router.param("busId", businessId);
+router.param("userId", userById);
+
+module.exports = router;
