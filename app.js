@@ -18,7 +18,7 @@ const userRoutes = require("./routes/userRoutes");
 const businesRoutes = require("./routes/businnesRoutes");
 const departamentRoutes = require("./routes/departamentRoutes");
 const ticketRoutes = require("./routes/ticketRoutes");
-const historyRoutes = require("./routes/historyRoutes");
+
 
 //app engloba todas las funciones de express
 
@@ -42,7 +42,7 @@ app.use("/api", userRoutes);
 app.use("/api", businesRoutes);
 app.use("/api", departamentRoutes);
 app.use("/api", ticketRoutes);
-app.use("/api", historyRoutes);
+
 
 // app.get('/', (req, res) => {
 //     res.send('Tood ok')
