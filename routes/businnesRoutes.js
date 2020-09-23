@@ -8,6 +8,7 @@ const {
   updateBusiness,
   businessId,
   readBusinessId,
+  update
 } = require("../controllers/businessController");
 
 const {
@@ -44,8 +45,7 @@ router.post(
 //Actualizar empresa
 router.put(
   "/business/:busId",
-
-  updateBusiness
+  update
 );
 
 router.delete(

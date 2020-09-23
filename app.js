@@ -1,8 +1,10 @@
 const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
+
 //Body parser nos sirve para manejar todo el cuerpo de la request y la respuesta y como se
 //van a devolver esos datos
+
 dotenv.config({
   path: "./.env",
 });
@@ -12,7 +14,9 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const expressValidator = require("express-validator");
 const globalErrorHandler = require("./helpers/dbErrorHandler");
+
 //Importar Routes
+
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const businesRoutes = require("./routes/businnesRoutes");

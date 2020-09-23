@@ -2,7 +2,8 @@ const Business = require("../models/business");
 const catchAsync = require("../validator/catchAsync");
 const AppError = require("../validator/appError");
 
-exports.businessId = catchAsync(async (req, res, next) => {
+/*exports.businessId = catchAsync(async (req, res, next) => {
+  console.log(req.params.busId)
   const business = await Business.findById(req.params.busId);
 
   if (!business) {
@@ -10,7 +11,22 @@ exports.businessId = catchAsync(async (req, res, next) => {
   }
 
   req.params = business;
-  console.log(req.params)
+  console.log(req.params.busId)
+
+});
+*/
+exports.businessId = catchAsync(async (req, res, next) => {
+  console.log(req.params.busId)
+  let business = await Business.findById(req.params.busId);
+  //console.log("el " + departament);
+  if (!business) {
+    return res.status(401).json({
+      error: "Departament found Id",
+    });
+  }
+
+  req.params = business;
+  //console.log(req.params);
   next();
 });
 
@@ -41,13 +57,14 @@ exports.createBusiness = catchAsync(async (req, res) => {
 });
 
 exports.updateBusiness = catchAsync(async (req, res) => {
-  const business = await Business.findOneAndUpdate(req.params.busId, req.body, {
+  console.log(req.params.busId)
+  let business = await Business.findOneAndUpdate(req.params.busId, req.body, {
     new: true,
     runValidators: true,
   });
-  console.log(req.body)
-  console.log(req.params.busId)
-  console.log(business)
+  console.log(req.params.id)
+  //console.log(req.body)
+  //console.log(business)
 
   res.status(200).json({
     status: "sucess",
@@ -56,6 +73,18 @@ exports.updateBusiness = catchAsync(async (req, res) => {
     },
   });
 });
+exports.update = (req, res) => {
+  const business = req.body;
+
+  business.save((err, data) => {
+    if (err) {
+      return res.status(400).json({
+        error: err
+      });
+    }
+    res.json(data);
+  });
+};
 
 exports.deleteBusiness = catchAsync(async (req, res) => {
   const business = await Business.findByIdAndDelete(req.params.busId);

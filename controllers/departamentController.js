@@ -1,5 +1,4 @@
 const Departament = require("../models/departament");
-
 const catchAsync = require("../validator/catchAsync");
 
 exports.departamentId = catchAsync(async (req, res, next) => {
