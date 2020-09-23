@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 const {
   readId,
   ticketId,
@@ -20,7 +19,10 @@ const {
 } = require("../controllers/authController");
 const { userById } = require("../controllers/userController");
 
+//Routes
+
 router.get("/ticket/:userId", requireSignin, isAuth, isAdmin, listTicket);
+
 router.get(
   "/ticket/historial/:userId",
   requireSignin,
@@ -28,8 +30,6 @@ router.get(
   isAdmin,
   historialList
 );
-
-//Routes
 
 router.get("/ticket/:userId/:ticketId", requireSignin, isAuth, isAdmin, readId);
 

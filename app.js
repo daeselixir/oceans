@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
+const mailer = require("./templates/registro-templates");
 
 //Body parser nos sirve para manejar todo el cuerpo de la request y la respuesta y como se
 //van a devolver esos datos
@@ -23,7 +24,6 @@ const businesRoutes = require("./routes/businnesRoutes");
 const departamentRoutes = require("./routes/departamentRoutes");
 const ticketRoutes = require("./routes/ticketRoutes");
 
-
 //app engloba todas las funciones de express
 
 const app = express();
@@ -40,13 +40,17 @@ app.use(cookieParser());
 app.use(expressValidator());
 app.use(cors());
 
+app.get("/email", (req, res) => {
+  console.log(req.body);
+  mailer.enviarMail("hola");
+});
+
 //Routes middleware
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", businesRoutes);
 app.use("/api", departamentRoutes);
 app.use("/api", ticketRoutes);
-
 
 // app.get('/', (req, res) => {
 //     res.send('Tood ok')
