@@ -64,7 +64,7 @@ exports.updateBusiness = catchAsync(async (req, res) => {
   });
   console.log(req.params.id)
   //console.log(req.body)
-  //console.log(business)
+  //console.log(business) 
 
   res.status(200).json({
     status: "sucess",
