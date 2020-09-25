@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 var ObjectId = require("mongodb").ObjectID;
 
 //Conexion coleccion Historial
+
 var Schema = mongoose.Schema;
 mongoose.connect(
   "mongodb+srv://daeselixir:mahuida1106@cluster0.to4nx.mongodb.net/oceans?retryWrites=true&w=majority",

@@ -16,7 +16,7 @@ const AppError = require("../validator/appError");
 });
 */
 exports.businessId = catchAsync(async (req, res, next) => {
-  console.log(req.params.busId)
+  console.log(req.params.busId);
   let business = await Business.findById(req.params.busId);
   //console.log("el " + departament);
   if (!business) {
@@ -56,30 +56,17 @@ exports.createBusiness = catchAsync(async (req, res) => {
   });
 });
 
-exports.updateBusiness = catchAsync(async (req, res) => {
-  console.log(req.params.busId)
-  let business = await Business.findOneAndUpdate(req.params.busId, req.body, {
-    new: true,
-    runValidators: true,
-  });
-  console.log(req.params.id)
-  //console.log(req.body)
-  //console.log(business) 
-
-  res.status(200).json({
-    status: "sucess",
-    data: {
-      business,
-    },
-  });
-});
-exports.update = (req, res) => {
-  const business = req.body;
+exports.updateBusiness = (req, res) => {
+  const business = req.params;
+  console.log(business);
+  business.rut = req.body.rut;
+  business.name = req.body.name;
+  business.direction = req.body.direction;
 
   business.save((err, data) => {
     if (err) {
       return res.status(400).json({
-        error: err
+        error: err,
       });
     }
     res.json(data);

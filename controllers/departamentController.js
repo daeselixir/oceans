@@ -1,17 +1,16 @@
 const Departament = require("../models/departament");
 const catchAsync = require("../validator/catchAsync");
+const AppError = require("../validator/appError");
 
 exports.departamentId = catchAsync(async (req, res, next) => {
   const departament = await Departament.findById(req.params.depId);
-  //console.log("el " + departament);
+
   if (!departament) {
-    return res.status(401).json({
-      error: "Departament found Id",
-    });
+    return next(new AppError("No departament id ", 404));
   }
 
   req.params = departament;
-  //console.log(req.params);
+
   next();
 });
 
@@ -40,19 +39,20 @@ exports.createDepartament = catchAsync(async (req, res) => {
     },
   });
 });
-exports.updateDepartament = catchAsync(async (req, res) => {
-  const dep = await Departament.findOneAndUpdate(req.params.depId, req.body, {
-    new: true,
-    runValidators: true,
-  });
 
-  res.status(200).json({
-    status: "sucess",
-    data: {
-      dep,
-    },
+exports.updateDepartament = (req, res) => {
+  const departament = req.params;
+  departament.name = req.body.name;
+
+  departament.save((err, data) => {
+    if (err) {
+      return res.status(400).json({
+        error: err,
+      });
+    }
+    res.json(data);
   });
-});
+};
 
 exports.deleteDepartament = catchAsync(async (req, res, next) => {
   let departament = req.params;

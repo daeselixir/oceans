@@ -8,7 +8,6 @@ const {
   updateBusiness,
   businessId,
   readBusinessId,
-  update
 } = require("../controllers/businessController");
 
 const {
@@ -17,9 +16,7 @@ const {
   isAdmin,
 } = require("../controllers/authController");
 
-const {
-  userById
-} = require("../controllers/userController");
+const { userById } = require("../controllers/userController");
 
 //Routes
 
@@ -44,8 +41,11 @@ router.post(
 );
 //Actualizar empresa
 router.put(
-  "/business/:busId",
-  update
+  "/business/:userId/:busId",
+  requireSignin,
+  isAuth,
+  isAdmin,
+  updateBusiness
 );
 
 router.delete(
