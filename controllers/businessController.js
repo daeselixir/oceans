@@ -1,24 +1,10 @@
 const Business = require("../models/business");
 const catchAsync = require("../validator/catchAsync");
-const AppError = require("../validator/appError");
 
-/*exports.businessId = catchAsync(async (req, res, next) => {
-  console.log(req.params.busId)
-  const business = await Business.findById(req.params.busId);
-
-  if (!business) {
-    return next(new AppError("No business whit that Id", 404));
-  }
-
-  req.params = business;
-  console.log(req.params.busId)
-
-});
-*/
 exports.businessId = catchAsync(async (req, res, next) => {
   console.log(req.params.busId);
   let business = await Business.findById(req.params.busId);
-  //console.log("el " + departament);
+
   if (!business) {
     return res.status(401).json({
       error: "Departament found Id",
@@ -26,7 +12,7 @@ exports.businessId = catchAsync(async (req, res, next) => {
   }
 
   req.params = business;
-  //console.log(req.params);
+
   next();
 });
 

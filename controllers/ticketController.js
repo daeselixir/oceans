@@ -1,6 +1,5 @@
 const Ticket = require("../models/ticket.js");
 const catchAsync = require("../validator/catchAsync");
-const nodemailer = require("nodemailer");
 
 const mongoose = require("mongoose");
 var ObjectId = require("mongodb").ObjectID;

@@ -20,12 +20,10 @@ exports.signup = catchAsync(async (req, res) => {
 });
 //Ingresar
 exports.signin = (req, res) => {
-  const {
-    email,
-    password
-  } = req.body;
+  const { email, password } = req.body;
   //console.log(req.profile);
-  User.findOne({
+  User.findOne(
+    {
       email,
     },
     (err, user) => {
@@ -43,7 +41,8 @@ exports.signin = (req, res) => {
         });
       }
       // generate a signed token with user id and secret
-      const token = jwt.sign({
+      const token = jwt.sign(
+        {
           _id: user._id,
         },
         process.env.JWT_SECRET
@@ -54,12 +53,8 @@ exports.signin = (req, res) => {
       });
 
       // return response with user and token to frontend client
-      const {
-        _id,
-        name,
-        email,
-        role
-      } = user;
+
+      const { _id, name, email, role } = user;
       return res.json({
         token,
         user: {
@@ -74,6 +69,7 @@ exports.signin = (req, res) => {
 };
 
 //Para salir de la aplicacion y limpiar la cookie
+
 exports.signout = (req, res) => {
   res.clearCookie("t");
   res.json({
@@ -81,6 +77,7 @@ exports.signout = (req, res) => {
   });
 };
 //Requiere la informacion o firma del token
+
 exports.requireSignin = expressJwt({
   secret: process.env.JWT_SECRET,
   userProperty: "auth",
